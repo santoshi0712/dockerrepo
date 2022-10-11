@@ -1,0 +1,47 @@
+name: $(date:yyyyMMdd)$(rev:.r)
+resources:
+  repositories:
+  - repository: self
+    type: git
+    ref: refs/heads/main
+jobs:
+- job: Job_1
+  displayName: Agent job 1
+  pool:
+    vmImage: ubuntu-18.04
+  steps:
+  - checkout: self
+    clean: true
+    fetchTags: false
+  - task: Bash@3
+    displayName: Bash Script
+    inputs:
+      targetType: inline
+      script: >
+        # Write your commands here
+
+
+        echo 'Hello world'
+
+        curl -sSf -u "ayushigupta121299@gmail.com:Ayushig1212@" \
+               -O 'https://mypoc1.jfrog.io/artifactory/sampletrail/numeric-0.0.1.jar'
+        du -sh numeric-0.0.1.jar
+  - task: Docker@0
+    displayName: Build an image
+    inputs:
+      azureSubscriptionEndpoint: 50241cef-968f-4072-af0d-9827533696b7
+      azureContainerRegistry: '{"loginServer":"santuacrtrail.azurecr.io", "id" : "/subscriptions/757f5bd2-4fe5-47cf-a431-1cd3b0b375f2/resourceGroups/RBA-AKS-RG3/providers/Microsoft.ContainerRegistry/registries/santuacrtrail"}'
+  - task: Docker@0
+    displayName: Push an image
+    inputs:
+      azureSubscriptionEndpoint: 50241cef-968f-4072-af0d-9827533696b7
+      azureContainerRegistry: '{"loginServer":"santuacrtrail.azurecr.io", "id" : "/subscriptions/757f5bd2-4fe5-47cf-a431-1cd3b0b375f2/resourceGroups/RBA-AKS-RG3/providers/Microsoft.ContainerRegistry/registries/santuacrtrail"}'
+      action: Push an image
+  - task: CopyFiles@2
+    displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+    inputs:
+      Contents: azure-aks.yml
+      TargetFolder: $(build.artifactstagingdirectory)
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop'
+...
