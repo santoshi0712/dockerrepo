@@ -5,7 +5,8 @@
 
 trigger:
 - main
-
+jobs:
+  - job: job1
 pool:
   vmImage: ubuntu-latest
   task: AzureKeyVault@2
