@@ -13,7 +13,7 @@ pool:
               inputs:
                 ConnectedServiceName: 819300dc-07f6-47d7-a595-06636b74cb56
                 KeyVaultName: test-rba-kv01
-   task: Bash@3
+  task: Bash@3
               displayName: Bash Script
               inputs:
                 targetType: inline
