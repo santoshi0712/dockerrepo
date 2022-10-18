@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: pasikantikarthikdockerrepo 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pasikantikarthikdockerrepo
+  template:
+    metadata:
+      labels:
+        app: pasikantikarthikdockerrepo 
+    spec:
+      containers:
+        - name: pasikantikarthikdockerrepo 
+          image: santuacrtrail.azurecr.io/pasikantikarthikdockerrepo
+          ports:
+          - containerPort: 80
