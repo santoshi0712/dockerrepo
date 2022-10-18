@@ -5,7 +5,7 @@ resources:
     type: git
     ref: refs/heads/main
 stages:
-- stage: build
+ - stage: build
     jobs:
     - job: Job_1
       displayName: Agent job 1
@@ -46,8 +46,7 @@ stages:
           TargetFolder: $(build.artifactstagingdirectory)
       - task: PublishBuildArtifacts@1
         displayName: 'Publish Artifact: drop'
-    ...
-- stage: deploy
+ - stage: deploy
     jobs:
     - job: deploytoAKS
       displayName: Agent job 2
@@ -62,7 +61,7 @@ stages:
           useLegacyPattern: true
           enableTelemetry: false
 
-       steps:
+      steps:
        - task: Kubernetes@0
          displayName: 'kubectl apply'
          inputs:
