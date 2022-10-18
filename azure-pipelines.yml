@@ -15,8 +15,6 @@ stages:
           displayName: Agent job 1
           steps:
           - checkout: self
-             clean: true
-             fetchTags: false
           - task: AzureKeyVault@2
               displayName: Azure Key Vault
               inputs:
