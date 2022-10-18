@@ -9,21 +9,19 @@ trigger:
 pool:
   vmImage: ubuntu-latest
   task: AzureKeyVault@2
-              displayName: Azure Key Vault
-              inputs:
-                ConnectedServiceName: 819300dc-07f6-47d7-a595-06636b74cb56
-                KeyVaultName: test-rba-kv01
+    displayName: Azure Key Vault
+    inputs:
+    ConnectedServiceName: 819300dc-07f6-47d7-a595-06636b74cb56
+    KeyVaultName: test-rba-kv01
   task: Bash@3
-              displayName: Bash Script
-              inputs:
-                targetType: inline
-                script: >2
+    displayName: Bash Script
+    inputs:
+    targetType: inline
+    script: >2
 
-                  # Write your commands here
-
-
-                  curl -sSf -u "ayushigupta121299@gmail.com:$(jfrogpassword)" \
-                        -O 'https://trailserver.jfrog.io/artifactory/demo-demo-repo/numeric-0.0.1.jar'
+    # Write your commands here
+    curl -sSf -u "ayushigupta121299@gmail.com:$(jfrogpassword)" \
+     -O 'https://trailserver.jfrog.io/artifactory/demo-demo-repo/numeric-0.0.1.jar'
 - task: Docker@2
   inputs:
     containerRegistry: 'santuacrtrail-2120'
