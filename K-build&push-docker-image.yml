@@ -1,0 +1,49 @@
+name: $(date:yyyyMMdd)$(rev:.r)
+resources:
+  repositories:
+  - repository: self
+    type: git
+    ref: refs/heads/main
+jobs:
+- job: Job_1
+  displayName: Agent job 1
+  pool:
+    vmImage: ubuntu-latest
+  steps:
+  - checkout: self
+    clean: true
+    fetchTags: false
+  - task: AzureKeyVault@2
+    displayName: Azure Key Vault
+    inputs:
+      ConnectedServiceName: 819300dc-07f6-47d7-a595-06636b74cb56
+      KeyVaultName: test-rba-kv01
+  - task: Bash@3
+    displayName: Bash Script
+    inputs:
+      targetType: inline
+      script: >2
+
+        # Write your commands here
+
+
+        curl -sSf -u "ayushigupta121299@gmail.com:$(jfrogpassword)" \
+               -O 'https://trailserver.jfrog.io/artifactory/demo-demo-repo/numeric-0.0.1.jar'
+  - task: Docker@0
+    displayName: Build an image
+    inputs:
+      azureSubscriptionEndpoint: 260579fd-4aa1-4c83-9395-3ad8cc33be24
+      azureContainerRegistry: '{"loginServer":"santuacrtrail.azurecr.io", "id" : "/subscriptions/757f5bd2-4fe5-47cf-a431-1cd3b0b375f2/resourceGroups/RBA-AKS-RG3/providers/Microsoft.ContainerRegistry/registries/santuacrtrail"}'
+      imageName: santuacrtrail.azurecr.io/pasikantikarthik/dockerrepo:$(Build.BuildId)
+  - task: Docker@0
+    displayName: Push an image
+    inputs:
+      azureSubscriptionEndpoint: 260579fd-4aa1-4c83-9395-3ad8cc33be24
+      azureContainerRegistry: '{"loginServer":"santuacrtrail.azurecr.io", "id" : "/subscriptions/757f5bd2-4fe5-47cf-a431-1cd3b0b375f2/resourceGroups/RBA-AKS-RG3/providers/Microsoft.ContainerRegistry/registries/santuacrtrail"}'
+      action: Push an image
+      imageName: santuacrtrail.azurecr.io/pasikantikarthik/dockerrepo:$(Build.BuildId)
+  - task: PublishPipelineArtifact@1
+    displayName: Publish Pipeline Artifact
+    inputs:
+      path: azure-aks-test.yaml
+...
