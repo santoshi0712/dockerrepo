@@ -6,7 +6,7 @@ resources:
     ref: refs/heads/main
 stages:
  - stage: build
-    jobs:
+   jobs:
     - job: Job_1
       displayName: Agent job 1
       pool:
@@ -47,7 +47,7 @@ stages:
       - task: PublishBuildArtifacts@1
         displayName: 'Publish Artifact: drop'
  - stage: deploy
-    jobs:
+   jobs:
     - job: deploytoAKS
       displayName: Agent job 2
       pool:
