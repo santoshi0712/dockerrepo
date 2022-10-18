@@ -56,17 +56,15 @@ stages:
       - task: qetza.replacetokens.replacetokens-task.replacetokens@3
         displayName: 'Replace tokens in azure-aks.yml'
         inputs:
-          rootDirectory: '$(System.DefaultWorkingDirectory)/_Dockerfile-CI/drop/'
-          targetFiles: 'azure-aks.yml'
-          useLegacyPattern: true
-          enableTelemetry: false
-
-      steps:
-       - task: Kubernetes@0
-         displayName: 'kubectl apply'
-         inputs:
-            kubernetesServiceConnection: myAKS
-            namespace: 'team-ns'
-            command: apply
-            useConfigurationFile: true
-            configuration: '$(System.DefaultWorkingDirectory)/_Dockerfile-CI/drop/azure-aks.yml'
+         rootDirectory: '$(System.DefaultWorkingDirectory)/_Dockerfile-CI/drop/'
+         targetFiles: 'azure-aks.yml'
+         useLegacyPattern: true
+         enableTelemetry: false
+      - task: Kubernetes@0
+        displayName: 'kubectl apply'
+        inputs:
+         kubernetesServiceConnection: myAKS
+         namespace: 'team-ns'
+         command: apply
+         useConfigurationFile: true
+         configuration: '$(System.DefaultWorkingDirectory)/_Dockerfile-CI/drop/azure-aks.yml'
