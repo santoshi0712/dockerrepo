@@ -49,4 +49,5 @@ resources:
         displayName: Publish Pipeline Artifact
         inputs:
           path: azure-aks-test.yaml
-    ...
+    
+...
