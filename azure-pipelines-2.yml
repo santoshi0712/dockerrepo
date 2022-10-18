@@ -1,15 +1,14 @@
 trigger:
 - main
 
-stages:
-  - stage: build
-
 name: $(date:yyyyMMdd)$(rev:.r)
 resources:
   repositories:
   - repository: self
     type: git
     ref: refs/heads/main
+stages:
+  - stage: build
     jobs:
     - job: Job_1
       displayName: Agent job 1
