@@ -53,8 +53,12 @@ stages:
           path: azure-aks-test.yaml
     
   - stage: deploytoAKS
-      jobs:
-    - job: Job_1
+    displayName: 'deploy to AKS'
+    jobs:
+      - deployment:
+        pool: 
+          vmImage: 'ubuntu-latest'
+        environment: 'Dev'
 
     - task: qetza.replacetokens.replacetokens-task.replacetokens@3
        displayName: 'Replace tokens in azure-aks-test.yaml'
