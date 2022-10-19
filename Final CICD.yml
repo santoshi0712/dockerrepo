@@ -1,4 +1,4 @@
-name: $(date:yyyyMMdd)$(rev:.r)
+name: trailpipeline
 resources:
   repositories:
   - repository: self
