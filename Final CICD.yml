@@ -4,11 +4,11 @@ resources:
   - repository: self
     type: git
     ref: refs/heads/main
+ pool:
+    vmImage: ubuntu-18.04
 jobs:
 - job: Job_1
   displayName: Agent job 1
-  pool:
-    vmImage: ubuntu-18.04
   steps:
   - checkout: self
     clean: true
