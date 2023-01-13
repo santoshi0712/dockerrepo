@@ -27,7 +27,6 @@ steps:
           }
         ]
       }
-
 - script: |
     echo pwd
 - task: Docker@2
