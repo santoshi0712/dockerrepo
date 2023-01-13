@@ -28,6 +28,8 @@ steps:
         ]
       }
     failNoOp: true
+- script: |
+    echo pwd
 
 - task: Docker@2
   inputs:
