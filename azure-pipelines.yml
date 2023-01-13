@@ -27,7 +27,7 @@ steps:
           }
         ]
       }
-    failNoOp: true
+      file: https://devopsrbapoc.jfrog.io/artifactory/devopsrbapoc-generic-local/sample.jar
 - script: |
     echo pwd
 - task: Docker@2
