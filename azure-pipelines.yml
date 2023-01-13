@@ -13,6 +13,22 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
+- task: JFrogGenericArtifacts@1
+  inputs:
+    command: 'Download'
+    connection: 'jfrogscv2'
+    specSource: 'taskConfiguration'
+    fileSpec: |
+      {
+        "files": [
+          {
+              "pattern": "rba-artifacts/spring-boot/spring-boot/2.6.9/spring-boot-2.6.9.jar",
+                   "target": "rba-artifacts/"
+          }
+        ]
+      }
+    failNoOp: true
+
 - task: Docker@2
   inputs:
     containerRegistry: 'acr-connection'
