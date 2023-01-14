@@ -18,7 +18,7 @@ steps:
     command: 'login'
 
 - script: echo Hello, world!
-  git clone https://github.com/santoshi0712/devopsrbapoc.git
+    git clone https://github.com/santoshi0712/devopsrbapoc.git
 
 - task: Docker@2
   inputs:
